@@ -1,0 +1,250 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Budget Calendar</title>
+<style>
+
+.flexbox {
+	display: flex;
+	display: -webkit-flex;
+}
+
+body {
+	min-height: 100vh;
+	margin: 0;
+	padding: 0;
+}
+
+nav, header, #nav2, main, #calendar {
+	flex: 1;
+	-webkit-flex: 1;
+}
+
+nav {
+	border: solid red 1px;
+	max-width: 4em;
+}
+
+header {
+	max-height: 4em;
+	justify-content: center;
+	-webkit-justify-content: center;
+	align-items: center;
+	-webkit-align-items: center;
+	border: solid green 1px;
+}
+
+header h1 {
+	margin: 0 0.25em;
+	font-size: 1.5em;
+}
+
+#nav2 {
+	max-height: 2em;
+	justify-content: flex-end;
+	-webkit-justify-content: flex-end;
+	align-items: center;
+	-webkit-align-items: center;
+	border: solid orange 1px;
+}
+
+#nav2 span {
+	margin: 0 0.5em;
+	padding: 0 1em;
+	border: solid gray 2px;
+}
+
+main {
+	flex-direction: column;
+	-webkit-flex-direction: column;
+	border: solid blue 1px;
+}
+
+#calendar {
+	min-width: 100%;
+	min-height: 100%;
+	flex-direction: column;
+	-webkit-flex-direction: column;
+	overflow: scroll;
+}
+
+#calendar div {
+	display: flex;
+	display: -webkit-flex;
+}
+
+.row {
+	flex: 1;
+	-webkit-flex: 1;
+}
+.day {
+	border: solid 1px gray;
+	min-height: 100px;
+	min-width: 100px;
+	flex: 1;
+	padding: 0 0.15em;
+	-webkit-flex: 1;
+	flex-direction: column;
+	-webkit-flex-direction: column;
+	justify-content: flex-start;
+	-webkit-justify-content: flex-start;
+}
+.day * {
+	margin: 0;
+}
+
+.dayHeader {
+	border-bottom: solid gray 1px;
+	margin-bottom: 0.1em;
+}
+
+.date {
+	margin: 0.15em 0 0 auto;
+	width: 1em;
+	text-align: right;
+	font: 0.8em Arial;
+}
+
+.entries {
+	flex-direction: column;
+	-webkit-flex-direction: column;
+}
+
+.balance {
+
+}
+
+.income, .expense {
+	padding: 0.25em 0.5em;
+	border: solid 1px;
+	border-radius: 5px;
+	font: 0.8em "Palatino";
+	color: white;
+}
+
+.income {
+	background-color: green;
+}
+
+.expense {
+	background-color: red;
+}
+
+#weekHeader {
+	max-height: 2em;
+	align-items: center;
+	-webkit-align-items: center;
+	justify-content: space-around;
+	-webkit-justify-content: space-around;
+	font-weight: bold;
+	border-bottom: solid gray 2px;
+}
+
+</style>
+<script src="budgetcalendar.js"></script>
+<script>
+
+/*
+window.onload = function() {
+
+var calendar = document.getElementById("calendar");
+var dates = calendar.getElementsByClassName("dayHeader");
+var entries = calendar.getElementsByClassName("entries");
+
+for (var i = 0; i < dates.length; i++) {
+	var p = document.createElement("p");
+	var p2 = document.createElement("p");
+	var p3 = document.createElement("p");
+	p.setAttribute("class", "date");
+	p2.setAttribute("class", "income");
+	p3.setAttribute("class", "expense");
+	var text = document.createTextNode("1");
+	var text2 = document.createTextNode("Something");
+	var text3 = document.createTextNode("Something");
+	p.appendChild(text);
+	p2.appendChild(text2);
+	p3.appendChild(text3);
+	dates[i].appendChild(p);
+	entries[i].appendChild(p2);
+	entries[i].appendChild(p3);
+}
+
+};*/
+
+function populateCalendar() {
+	var calendar = document.getElementById("calendar");
+	for (var i = 0; i < 52; i++) {
+		var row = document.createElement("div");
+		row.setAttribute("class", "row");
+		calendar.appendChild(row);
+		for (var x = 0; x < 7; x++) {
+			var day = document.createElement("div");
+			day.setAttribute("class", "day");
+			row.appendChild(day);
+			var dayHeader = document.createElement("div");
+			dayHeader.setAttribute("class", "dayHeader");
+			day.appendChild(dayHeader);
+			var d = document.createElement("p");
+			d.setAttribute("class", "date");
+			dayHeader.appendChild(d);
+			var entries = document.createElement("div");
+			entries.setAttribute("class", "entries");
+			day.appendChild(entries);
+		}
+		
+	}
+}
+
+window.onload = populateCalendar;
+
+</script>
+</head>
+
+<body class="flexbox">
+
+<nav style="display: none;">
+
+</nav>
+
+<main class="flexbox">
+
+<header class="flexbox">
+	<h1 id="month">Month</h1>
+	<h1 id="year">Year</h1>
+</header>
+
+<div id="nav2" class="flexbox">
+	<span onclick="goToToday()">Today</span>
+	<span>&lt;</span>
+	<span>&gt;</span>
+</div>
+
+<section id="calendar" class="flexbox">
+	<div id="weekHeader" class="row">
+		<span>Sunday</span>
+		<span>Monday</span>
+		<span>Tuesday</span>
+		<span>Wednesday</span>
+		<span>Thursday</span>
+		<span>Friday</span>
+		<span>Saturday</span>
+	</div>
+
+<!--PROTOTYPE-->	
+	<div class="row">
+		<div class="day">
+			<div class="dayHeader">
+				<p class="date"></p>
+			</div>
+			<div class="entries"></div>
+		</div>
+	</div>
+<!-- -->
+
+</section>
+
+</main>
+
+</body>
+</html>

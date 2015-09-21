@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Tester</title>
+<script src="budgetcalendar.js"></script>
+<script>
+
+window.onload = function() {
+	var calen = new Calendar("Andy's Calendar");
+	var output = document.getElementById("output");
+	var output2 = document.getElementById("output2");
+	var output3 = document.getElementById("output3");
+	var output4 = document.getElementById("output4");
+	
+	output.innerHTML = calen.year[0].month.length;
+	var today = new Date().toDateString();
+	output2.innerHTML = calen.year[0].month[11].day[30].date;
+	if (calen.year[0].month[5].day[9].date === today) {
+	    output3.innerHTML = true;    
+	} else {
+	    output3.innerHTML = false;
+	}
+	var totalDays = (function() {
+		for (var i = 0; i < calen.year[0].month.length; i++) {
+			return calen.year[0].month.length;
+		}
+	})();
+	output4.innerHTML = calen.year[0].month[11].month;
+	
+}
+
+</script>
+</head>
+
+<body>
+<p>Is this thing on?</p>
+<p id="output"></p>
+<p id="output2"></p>
+<p id="output3"></p>
+<p id="output4"></p>
+
+</body>
+</html>
